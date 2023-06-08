@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Tarefas</title>
+  <style>
+    .completed {
+      text-decoration: line-through;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#taskForm').submit(function(e) {
+        e.preventDefault();
+        var taskName = $('#taskName').val().trim();
+        if (taskName !== '') {
+          var listItem = $('<li>').text(taskName);
+          $('#taskList').append(listItem);
+          $('#taskName').val('');
+        }
+      });
+
+      $('#taskList').on('click', 'li', function() {
+        $(this).toggleClass('completed');
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Lista de Tarefas</h1>
+  <form id="taskForm">
+    <input type="text" id="taskName" placeholder="Nome da tarefa" required>
+    <button type="submit">Cadastrar Tarefa</button>
+  </form>
+  <h2>Tarefas</h2>
+  <ol id="taskList"></ol>
+</body>
+</html>
